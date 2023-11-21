@@ -1,13 +1,15 @@
-defmodule Quicksort do
-  def sort([]), do: []
+defmodule FormataString do
+  def nomeCapitalizado(nome) do
+    IO.puts("Nome antigo: " <> nome)
 
-  def sort([pivot | rest]) do
-    {less, greater} = Enum.split_with(rest, &(&1 <= pivot))
-    sort(less) ++ [pivot] ++ sort(greater)
+    nome_formatado =
+      nome
+      |> String.split(~r/\s+/, trim: true)
+      |> Enum.map(&String.capitalize/1)
+      |> Enum.join(" ")
+
+    IO.puts("Nome formatado: " <> nome_formatado)
   end
 end
 
-# Exemplo de uso:
-list = [4, 2, 8, 5, 1, 6, 3, 7]
-sorted_list = Quicksort.sort(list)
-IO.inspect(sorted_list) # Saída: [1, 2, 3, 4, 5, 6, 7, 8]
+FormataString.nomeCapitalizado("breNo di oLeVeira tERRa da seIva")
